@@ -23,19 +23,9 @@
   <div class="container">
     <div class="text-center mb-5">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add Task</button>
-      <!-- <button class="btn btn-success" id="addTask" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button> -->
     </div>
 
     <!-- Todo: Create a modal with a form to add tasks -->
-<!-- 
-    <div class="row card-pop-up " >
-      <div id="card-header-pop-up">
-        <h1 class="d-flex justify-content-center">Task Title</h1>
-      </div>
-      <div class="d-flex justify-content-center">past due</div>
-      <div class="d-flex justify-content-center"> Date </div>
-      <button type="button" class="btn btn-danger">Delete</button>
-    </div> -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -70,6 +60,7 @@
     <div class="row swim-lanes text-center justify-content-between">
       <div class="col-12 col-lg-4 d-flex">
         <div id="to-do" class="card border-light mb-3 lane flex-grow-1">
+          <div id="task-container"></div>
           <div class="card-header bg-white">
             <h2 class="card-title mb-1">To Do</h2>
           </div>
