@@ -1,9 +1,7 @@
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
-const taskTitleInputEl = $('#title-name-input');
-const taskDueDateInputEl = $('#taskDueDate');
-const taskDescriptionInputEl = $('#message-text');
+
 
 
 // Todo: create a function to generate a unique task id
@@ -54,7 +52,7 @@ function createTaskCard(task) {
     // ? Gather all the elements created above and append them to the correct elements.
     cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
     taskCard.append(cardHeader, cardBody);
-   
+
 
     // ? Return the card so it can be appended to the correct lane.
     return taskCard;
@@ -76,30 +74,31 @@ function renderTaskList() {
 function handleAddTask(event) {
 
     event.preventDefault();
-    
+
 
     localStorage.setItem('tasks', JSON.stringify(taskList));
 
     // ? Read user input from the form
-    const taskTitle = $('taskTitleInputEl:input').val;
-    const taskDueDate = $('taskDueDateInputEl:input').val;
-    const taskDescription = $('taskDescriptionInputEl:input').val;
+    const taskTitleInputEl = $('#title-name-input').val();
+    const taskDueDateInputEl = $('#taskDueDate').val();
+    const taskDescriptionInputEl = $('#message-text').val();
 
 
     const newTask = {
         // ? Here we use a Web API called `crypto` to generate a random id for our project. This is a unique identifier that we can use to find the project in the array. `crypto` is a built-in module that we can use in the browser and Nodejs.    id: crypto.randomUUID(),
+        id: generateTaskId(),
         name: taskTitle,
         description: taskDescription,
         dueDate: taskDueDate,
-        status: 'to-do',
-        
+
     };
 
+
     // ? Pull the projects from localStorage and push the new project to the array
-    const tasks = newTasks
+    let tasks = taskList
     tasks.push(newTask);
 
-
+    newTask.append($('#to-do'));
     // ? Clear the form inputs
     taskTitleInputEl.val('');
     taskDescriptionInputEl.val('');
@@ -111,18 +110,18 @@ function handleAddTask(event) {
 
 // Todo: create a function to handle deleting a task
 function handleDeleteTask(event) {
- event.preventDefault();
- $(this).closest('.card').remove();
+    event.preventDefault();
+    $(this).closest('.card').remove();
 
 
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
-    $( event )
-    .addClass( "ui-state-highlight" )
-    .find( "p" )
-    
+    $(event)
+        .addClass("ui-state-highlight")
+        .find("p")
+
 
 }
 
