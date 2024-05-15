@@ -38,22 +38,23 @@ function createTaskCard(task) {
 
 
     // Sets the card background color based on due date. Only apply the styles if the dueDate exists and the status is not done.
-    // if (task.dueDate && task.status !== 'done') {
-    //     const now = dayjs();
-    //     const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
+    if (task.dueDate && task.status !== 'done') {
+        const now = dayjs();
+        const taskDueDate = dayjs(task.dueDate, 'DD/MM/YYYY');
 
-    //     // ? If the task is due today, make the card yellow. If it is overdue, make it red.
-    //     if (now.isSame(taskDueDate, 'day')) {
-    //         taskCard.addClass('bg-warning text-white');
-    //     } else if (now.isAfter(taskDueDate)) {
-    //         taskCard.addClass('bg-danger text-white');
-    //         cardDeleteBtn.addClass('border-light');
-    //     }
-    // }
+        // ? If the task is due today, make the card yellow. If it is overdue, make it red.
+        if (now.isSame(taskDueDate, 'day')) {
+            taskCard.addClass('bg-warning text-white');
+        } else if (now.isAfter(taskDueDate)) {
+            taskCard.addClass('bg-danger text-white');
+            cardDeleteBtn.addClass('border-light');
+        }
+    }
 
     // ? Gather all the elements created above and append them to the correct elements.
     cardBody.append(cardDescription, cardDueDate, cardDeleteBtn);
     taskCard.append(cardHeader, cardBody);
+   
 
     // ? Return the card so it can be appended to the correct lane.
     return taskCard;
@@ -76,15 +77,13 @@ function handleAddTask(event) {
 
     event.preventDefault();
     
-    const addTaskButton = $('#addTaskBtn')
-    addTaskButton.on('submit' , createTaskCard());
 
     localStorage.setItem('tasks', JSON.stringify(taskList));
 
     // ? Read user input from the form
-    const taskTitle = taskTitleInputEl.val();
-    const taskDueDate = taskDueDateInputEl.val();
-    const taskDescription = taskDescriptionInputEl.val;
+    const taskTitle = $('taskTitleInputEl:input').val;
+    const taskDueDate = $('taskDueDateInputEl:input').val;
+    const taskDescription = $('taskDescriptionInputEl:input').val;
 
 
     const newTask = {
@@ -93,17 +92,13 @@ function handleAddTask(event) {
         description: taskDescription,
         dueDate: taskDueDate,
         status: 'to-do',
-        nextId: newid,
-
         
     };
 
     // ? Pull the projects from localStorage and push the new project to the array
-    const tasks = renderTaskList();
+    const tasks = newTasks
     tasks.push(newTask);
 
-    // ? Print project data back to the screen
-    renderTaskList()
 
     // ? Clear the form inputs
     taskTitleInputEl.val('');
@@ -124,7 +119,7 @@ function handleDeleteTask(event) {
 
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
-    $( this )
+    $( event )
     .addClass( "ui-state-highlight" )
     .find( "p" )
     
