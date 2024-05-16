@@ -1,6 +1,8 @@
 // Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
-let nextId = JSON.parse(localStorage.getItem("nextId"));
+taskList = Array.isArray(taskList) ? taskList : [];
+// I added this function to ensure that taskList is always in an array so you can use .push
+let nextId = JSON.parse(localStorage.getItem("nextId")) || 1;
 
 
 // Todo: create a function to generate a unique task id
@@ -93,33 +95,32 @@ function handleAddTask(event) {
 
 
     const newTask = {
-        // ? Here we use a Web API called `crypto` to generate a random id for our project. This is a unique identifier that we can use to find the project in the array. `crypto` is a built-in module that we can use in the browser and Nodejs.    id: crypto.randomUUID(),
         id: generateTaskId(),
         title: taskTitleInputEl,
         description: taskDueDateInputEl,
-        dueDate: taskDescriptionInputEl
+        dueDate: taskDescriptionInputEl,
+        status: 'to-do'
     };
 
-    const taskList = localStorage.getItem('tasks');
 
     taskList.push(newTask);
-
-    console.log(taskList);
 
     localStorage.setItem('tasks', JSON.stringify(newTask));
 
 
-    $('#to-do').append(newTask)
+    $('#to-do').append(createTaskCard(newTask));
 
-    $('#addTaskBtn').on('submit', createTaskCard(newTask));
 
-    renderTaskList();
 
-    
-    // ? Clear the form inputs
-    taskTitleInputEl.val('');
-    taskDescriptionInputEl.val('');
-    taskDueDateInputEl.val('');
+    // Clear the form inputs
+    $('#title-name-input').val('');
+    $('#taskDueDate').val('');
+    $('#message-text').val('');
+    $('#addTaskBtn').click(function(){
+        $('#exampleModal').modal('hide');
+    });
+
+
 
 }
 
@@ -148,11 +149,13 @@ $(document).ready(function () {
     console.log(taskList);
 
     renderTaskList();
+    $('#taskForm').on('submit',handleAddTask);
 
-
+   
     $(function () {
         $("#taskDueDate").datepicker();
     });
+
 
 });
 
