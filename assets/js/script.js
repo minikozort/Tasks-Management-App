@@ -95,17 +95,7 @@ function renderTaskList() {
     $('.draggable').draggable({
         opacity: 0.7,
         zIndex: 100,
-        // ? This is the function that creates the clone of the card that is dragged. This is purely visual and does not affect the data.
-        // helper: function (e) {
-        //     // ? Check if the target of the drag event is the card itself or a child element. If it is the card itself, clone it, otherwise find the parent card  that is draggable and clone that.
-        //     const original = $(e.target).hasClass('ui-draggable')
-        //     ? $(e.target)
-        //     : $(e.target).closest('.ui-draggable');
-        //     // ? Return the clone with the width set to the width of the original card. This is so the clone does not take up the entire width of the lane. This is to also fix a visual bug where the card shrinks as it's dragged to the right.
-        //     return original.clone().css({
-        //     width: original.outerWidth(),
-        //     });
-        // },
+
         });
 
     return taskList
@@ -157,23 +147,21 @@ function handleDeleteTask(event) {
     event.preventDefault();
 
     const taskId = $(this).attr('data-task-id');
-    const tasks = JSON.parse(localStorage.getItem("tasks"));
   
     // ? Remove project from the array. There is a method called `filter()` for this that is better suited which we will go over in a later activity. For now, we will use a `forEach()` loop to remove the project.
-    tasks.forEach((task) => {
-      if (task.id === taskId) {
-        tasks.splice(tasks.indexOf(task), 1);
+    taskList.forEach((task) => {
+      if (task.id == taskId) {
+        taskList.splice(taskList.indexOf(task), 1);
       }
     });
   
     // ? We will use our helper function to save the projects to localStorage
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(taskList));
   
     // ? Here we use our other function to print projects back to the screen
     renderTaskList();
-
     $(this).closest('.card').remove();
-
+    
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
@@ -192,7 +180,6 @@ function handleDrop(event, ui) {
     if (task.id == taskId) {
       task.status = newStatus;
 
-      console.log('test');
     }
    
   }
