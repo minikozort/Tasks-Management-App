@@ -9,10 +9,16 @@ body {
   
   .task-card {
     margin: 0 auto;
+    height: 200px;
   }
   
   .task-card:hover {
     cursor: grab;
+  }
+
+  .card-text {
+    display: flex;
+    justify-content: center;
   }
   
   .card-pop-up{
