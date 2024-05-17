@@ -8,7 +8,7 @@ In this challenge, I have created a JavaScript file using Jquery and Jquery UIs,
 How to Run:
 Simply go on to the website click on the "Add Task" button. Fill out the form and click on "Add Task" button to add your task. Your task automatically will show under "to-do" section, but no worries, as you complete this task - you can drag and drop it in to the "in Process" or "done" sections of the app.
 
-Deployed version link: 
+Deployed version link: https://minikozort.github.io/Tasks-Management-App/
 
 ![alt text](Task-Management-App.png)
 ![alt text](Modal.png)

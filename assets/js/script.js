@@ -1,4 +1,3 @@
-// Retrieve tasks and nextId from localStorage
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 taskList = Array.isArray(taskList) ? taskList : [];
 // I added this function to ensure that taskList is always in an array so you can use .push
@@ -12,17 +11,10 @@ function generateTaskId() {
     }
     else {
         nextId++
-
     }
     localStorage.setItem('nextId', JSON.stringify(nextId));
-
     return nextId;
-
-
 }
-
-
-
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
@@ -43,7 +35,6 @@ function createTaskCard(task) {
     // Sets the card background color based on due date. Only apply the styles if the dueDate exists and the status is not done.
     if (task.dueDate && task.status !== 'done') {
         const now = dayjs();
-
         const cardDueDate = dayjs(task.dueDate).format('MM/DD/YYYY');
 
         // ? If the task is due today, make the card yellow. If it is overdue, make it red.
@@ -95,8 +86,7 @@ function renderTaskList() {
     $('.draggable').draggable({
         opacity: 0.7,
         zIndex: 100,
-
-        });
+    });
 
     return taskList
 };
@@ -136,7 +126,7 @@ function handleAddTask(event) {
     var modalInstance = bootstrap.Modal.getInstance(modalElement);
     modalInstance.hide();
 
-
+    renderTaskList();
 }
 
 
@@ -160,8 +150,6 @@ function handleDeleteTask(event) {
   
     // ? Here we use our other function to print projects back to the screen
     renderTaskList();
-    $(this).closest('.card').remove();
-    
 }
 
 // Todo: create a function to handle dropping a task into a new status lane
@@ -179,9 +167,7 @@ function handleDrop(event, ui) {
     // ? Find the project card by the `id` and update the project status.
     if (task.id == taskId) {
       task.status = newStatus;
-
     }
-   
   }
 
   // ? Save the updated projects array to localStorage (overwritting the previous one) and render the new project data to the screen.
@@ -191,16 +177,8 @@ function handleDrop(event, ui) {
 
 // Todo: when the page loads, render the task list, add event listeners, make lanes droppable, and make the due date field a date picker
 $(document).ready(function () {
-
-
-
     renderTaskList();
-
-
-
     $('#taskForm').on('submit',handleAddTask);
-
-
     $(function () {
         $("#taskDueDate").datepicker();
     });
@@ -210,8 +188,4 @@ $(document).ready(function () {
         accept: '.draggable',
         drop: handleDrop,
     });
-
 });
-
-
-
