@@ -1,45 +1,29 @@
+
+/* Setting the Body Font size and family */
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
   }
-  
+  /* Setting the first column height */
   .swim-lanes {
     min-height: 60vh;
   }
-  
+  /* Setting the task card's height and margin */
   .task-card {
     margin: 0 auto;
     height: 200px;
   }
-  
+  /* Makes the mouse into a hand grab shape when hovered over */
   .task-card:hover {
     cursor: grab;
   }
-
+  /* Sets the new cards content center on the card */
   .card-text {
     display: flex;
     justify-content: center;
   }
   
-  .card-pop-up{
-    display: flex;
-    border: solid 3px black;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    width: 300px; 
-    padding: 2px;
-
-  }
-
-#card-header-pop-up{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: gray;
-    
-}
-
+/* Sets the button height and width */
 .btn{
     height: 40px;
     width: 100px;
